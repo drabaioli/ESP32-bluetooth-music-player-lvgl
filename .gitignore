@@ -1,3 +1,4 @@
+.*swp
 build/
 managed_components/
 dependencies.lock

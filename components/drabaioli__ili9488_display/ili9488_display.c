@@ -111,7 +111,7 @@ void initialize_spi()
 }
 
 
-void initialize_display( void * spi_driver_user_ctx )
+void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, void * spi_driver_user_ctx, size_t buffer_size )
 {
   const esp_lcd_panel_io_spi_config_t io_config = 
   {
@@ -120,7 +120,7 @@ void initialize_display( void * spi_driver_user_ctx )
     .spi_mode = 0,
     .pclk_hz = DISPLAY_REFRESH_HZ,
     .trans_queue_depth = DISPLAY_SPI_QUEUE_LEN,
-    .on_color_trans_done = notify_lvgl_flush_ready,
+    .on_color_trans_done = color_transfered_cb,
     .user_ctx = spi_driver_user_ctx,
     .lcd_cmd_bits = DISPLAY_COMMAND_BITS,
     .lcd_param_bits = DISPLAY_PARAMETER_BITS,
@@ -144,7 +144,7 @@ void initialize_display( void * spi_driver_user_ctx )
   const esp_lcd_panel_dev_config_t lcd_config = 
   {
     .reset_gpio_num = CONFIG_TFT_RESET_PIN,
-    .color_space = CONFIG_DISPLAY_COLOR_MODE,
+    .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
     .bits_per_pixel = 18,
     .flags =
     {
@@ -155,7 +155,7 @@ void initialize_display( void * spi_driver_user_ctx )
 
   ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)SPI2_HOST, &io_config, &lcd_io_handle)); 
 
-  ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, LV_BUFFER_SIZE, &lcd_handle));
+  ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, buffer_size, &lcd_handle));
 
   ESP_ERROR_CHECK(esp_lcd_panel_reset(lcd_handle));
   ESP_ERROR_CHECK(esp_lcd_panel_init(lcd_handle));
@@ -171,10 +171,10 @@ void initialize_display( void * spi_driver_user_ctx )
 }
 
 
-void setup_display( void * spi_driver_user_ctx )
+void setup_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, void * spi_driver_user_ctx, size_t buffer_size )
 {
   initialize_spi();
-  initialize_display( spi_driver_user_ctx );
+  initialize_display( color_transfered_cb, spi_driver_user_ctx, buffer_size );
   display_brightness_init();
   display_brightness_set(75);
 }
