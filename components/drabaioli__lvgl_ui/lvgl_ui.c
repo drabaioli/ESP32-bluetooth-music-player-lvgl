@@ -1,23 +1,17 @@
-#include <stdio.h>
+/* Most of this code comes from atanisoft/esp_lcd_ili9488 example:
+ * https://github.com/atanisoft/esp_lcd_ili9488/blob/main/examples/lvgl/main/main.c
+ */
+
 #include "lvgl_ui.h"
 
-
-//#include <driver/gpio.h>
-//#include <driver/ledc.h>
-//#include <driver/spi_master.h>
-//#include <esp_err.h>
-//#include <esp_freertos_hooks.h>
-//#include <esp_log.h>
-//#include <esp_lcd_panel_io.h>
-//#include <esp_lcd_panel_vendor.h>
-//#include <esp_lcd_panel_ops.h>
-//#include <esp_lcd_ili9488.h>
-//#include <esp_timer.h>
+#include <esp_log.h>
+#include <esp_timer.h>
+#include <esp_lcd_types.h>
+#include <esp_lcd_panel_io.h>
+#include <esp_lcd_panel_ops.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <lvgl.h>
-#include <stdio.h>
-#include "sdkconfig.h"
 
 static const char *TAG = "lvgl_ui";
 

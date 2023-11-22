@@ -2,21 +2,14 @@
  * https://github.com/atanisoft/esp_lcd_ili9488/blob/main/examples/lvgl/main/main.c
  */
 
-#include <stdio.h>
 #include "ili9488_display.h"
 
-#include <driver/gpio.h>
 #include <driver/ledc.h>
 #include <driver/spi_master.h>
 #include <esp_err.h>
-#include <esp_freertos_hooks.h>
 #include <esp_log.h>
-#include <esp_lcd_panel_io.h>
-#include <esp_lcd_panel_vendor.h>
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_ili9488.h>
-#include <esp_timer.h>
-//#include "sdkconfig.h"
 
 
 static const char *TAG = "ili9488_display";
