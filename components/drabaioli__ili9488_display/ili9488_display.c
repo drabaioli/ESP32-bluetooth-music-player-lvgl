@@ -164,6 +164,12 @@ void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered
 }
 
 
+esp_lcd_panel_handle_t get_lcd_handle()
+{
+  return lcd_handle;
+}
+
+
 void setup_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, void * spi_driver_user_ctx, size_t buffer_size )
 {
   initialize_spi();

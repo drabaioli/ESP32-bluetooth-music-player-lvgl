@@ -6,9 +6,6 @@
 
 #include <esp_log.h>
 #include <esp_timer.h>
-#include <esp_lcd_types.h>
-#include <esp_lcd_panel_io.h>
-#include <esp_lcd_panel_ops.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <lvgl.h>
@@ -17,8 +14,6 @@ static const char *TAG = "lvgl_ui";
 
 static const int LVGL_UPDATE_PERIOD_MS = 5;
 
-static esp_lcd_panel_handle_t lcd_handle = NULL; // TODO : Diego : Parametrize?
-
 static lv_disp_draw_buf_t lv_disp_buf;
 static lv_disp_drv_t      lv_disp_drv;
 static lv_disp_t *        lv_display = NULL;
@@ -26,7 +21,7 @@ static lv_color_t *       lv_buf_1   = NULL;
 static lv_color_t *       lv_buf_2   = NULL;
 
 
-static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io,
+bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io,
     esp_lcd_panel_io_event_data_t *edata, void *user_ctx)
 {
   lv_disp_drv_t *disp_driver = (lv_disp_drv_t *)user_ctx;
@@ -51,9 +46,9 @@ static void IRAM_ATTR lvgl_tick_cb(void *param)
 }
 
 
-void initialize_lvgl( int resolution_w, int resolution_h )
+void initialize_lvgl( size_t resolution_w, size_t resolution_h, esp_lcd_panel_handle_t lcd_handle )
 {
-  const size_t lv_buffer_size = resolution_w * 25;
+  const size_t lv_buffer_size = compute_buffer_size( resolution_w, resolution_h );
   ESP_LOGI(TAG, "Initializing LVGL");
   lv_init();
   ESP_LOGI(TAG, "Allocating %zu bytes for LVGL buffer", lv_buffer_size * sizeof(lv_color_t));
@@ -84,9 +79,21 @@ void initialize_lvgl( int resolution_w, int resolution_h )
 }
 
 
-void setup_lvgl_ui( int resolution_w, int resolution_h )
+void * get_lvgl_display_driver()
 {
-  initialize_lvgl( resolution_w, resolution_h );
+  return (void *)&lv_disp_drv;
+}
+
+
+size_t compute_buffer_size( size_t resolution_w, size_t resolution_h )
+{
+  return resolution_w * 25;
+}
+
+
+void setup_lvgl_ui( size_t resolution_w, size_t resolution_h, esp_lcd_panel_handle_t lcd_handle )
+{
+  initialize_lvgl( resolution_w, resolution_h, lcd_handle );
   //create_demo_ui();
 
   //while (1)
