@@ -19,6 +19,17 @@ void create_ui()
     lv_obj_add_style(lv_scr_act(), &style_screen, LV_STATE_DEFAULT);
 }
 
+void update_ui()
+{
+    // Set the background color of the display to black.
+    static unsigned int color = 0x0;
+    color += 0x1;
+    if( color > ( ( 1 << 16 ) - 1 ) ) color = 0x0; // 16 bits color ?
+    ESP_LOGI(TAG, "DIEGO: after create_ui %i", color);
+    lv_style_set_bg_color(&style_screen, lv_color_hex(color));
+    lv_obj_add_style(lv_scr_act(), &style_screen, LV_STATE_DEFAULT);
+}
+
 
 void app_main(void)
 {
@@ -37,7 +48,8 @@ void app_main(void)
   while (1)
   {
     ESP_LOGI(TAG, "DIEGO: looping...");
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(100));
+    update_ui();
     lv_timer_handler();
   }
 }
