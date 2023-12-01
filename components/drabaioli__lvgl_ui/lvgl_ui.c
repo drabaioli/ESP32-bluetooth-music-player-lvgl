@@ -94,12 +94,4 @@ size_t compute_buffer_size( size_t resolution_w, size_t resolution_h )
 void setup_lvgl_ui( size_t resolution_w, size_t resolution_h, esp_lcd_panel_handle_t lcd_handle )
 {
   initialize_lvgl( resolution_w, resolution_h, lcd_handle );
-  //create_demo_ui();
-
-  //while (1)
-  //{
-  //    vTaskDelay(pdMS_TO_TICKS(10));
-  //    lv_timer_handler();
-  //}
-
 }

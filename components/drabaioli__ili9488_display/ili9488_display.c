@@ -137,7 +137,7 @@ void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered
   const esp_lcd_panel_dev_config_t lcd_config = 
   {
     .reset_gpio_num = CONFIG_TFT_RESET_PIN,
-    .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
+    .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR,
     .bits_per_pixel = 18,
     .flags =
     {
@@ -175,5 +175,5 @@ void setup_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, 
   initialize_spi();
   initialize_display( color_transfered_cb, spi_driver_user_ctx, buffer_size );
   display_brightness_init();
-  display_brightness_set(75);
+  display_brightness_set(100);
 }
