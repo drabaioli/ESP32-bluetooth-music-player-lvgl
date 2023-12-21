@@ -1,0 +1,52 @@
+menu "ILI9488 Display"
+
+    config SPI_MISO
+        int "ILI8488 Display MISO pin"
+        range 0 34
+        default 32
+        help
+            GPIO number (IOxx) MISO pin.
+
+    config SPI_MOSI
+        int "ILI8488 Display MOSI pin"
+        range 0 34
+        default 2
+        help
+            GPIO number (IOxx) MOSI pin.
+
+    config SPI_CLOCK
+        int "ILI8488 Display SCK pin"
+        range 0 34
+        default 23
+        help
+            GPIO number (IOxx) SCK pin.
+
+    config TFT_CS_PIN
+        int "ILI8488 Display CS pin"
+        range 0 34
+        default 15
+        help
+            GPIO number (IOxx) CS pin.
+
+    config TFT_RESET_PIN
+        int "ILI8488 Display RESET pin"
+        range 0 34
+        default 21
+        help
+            GPIO number (IOxx) RESET pin.
+
+    config TFT_DC_PIN
+        int "ILI8488 Display DC/RS pin"
+        range 0 34
+        default 4
+        help
+            GPIO number (IOxx) DC/RS pin.
+
+    config TFT_BACKLIGHT_PIN
+        int "ILI8488 Display LED pin"
+        range 0 34
+        default 18
+        help
+            GPIO number (IOxx) LED pin.
+
+endmenu

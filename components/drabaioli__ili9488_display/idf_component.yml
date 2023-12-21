@@ -1,0 +1,7 @@
+## IDF Component Manager Manifest File
+dependencies:
+  atanisoft/esp_lcd_ili9488: "*"
+  ## Required IDF version
+  idf:
+    version: ">=4.1.0"
+version: 0.0.1
