@@ -1,0 +1,24 @@
+menu "KY040 Rotary Encoder"
+
+    config KY040_SW
+        int "KY040 button pin"
+        range 0 34
+        default 27
+        help
+            GPIO number (IOxx) SW pin.
+
+    config KY040_DT
+        int "KY040 data pin"
+        range 0 34
+        default 26
+        help
+            GPIO number (IOxx) DT pin.
+
+    config KY040_CLK
+        int "KY040 clock pin"
+        range 0 34
+        default 25
+        help
+            GPIO number (IOxx) CLK pin.
+
+endmenu
