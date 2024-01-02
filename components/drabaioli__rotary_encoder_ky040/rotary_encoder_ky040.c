@@ -44,12 +44,13 @@ void event_processor_task( void * rotaty_encoder_ky040_handle )
   }
 }
 
-static bool watchpoint_reached_isr( pcnt_unit_handle_t unit, const pcnt_watch_event_data_t *edata, void *user_ctx )
+
+static bool watchpoint_reached_isr( pcnt_unit_handle_t unit, const pcnt_watch_event_data_t * event_data, void * user_ctx )
 {
   BaseType_t high_task_wakeup;
   QueueHandle_t queue = (QueueHandle_t)user_ctx;
   // send event data to queue, from this interrupt callback
-  position_event_t encoder_position = edata->watch_point_value == PCNT_HIGH_LIMIT ? ENCODER_POSITION_INCREMENT : ENCODER_POSITION_DECREMENT;
+  position_event_t encoder_position = event_data->watch_point_value == PCNT_HIGH_LIMIT ? ENCODER_POSITION_INCREMENT : ENCODER_POSITION_DECREMENT;
   xQueueSendFromISR( queue, &encoder_position, &high_task_wakeup );
   return (high_task_wakeup == pdTRUE);
 }

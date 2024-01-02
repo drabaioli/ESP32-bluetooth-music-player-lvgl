@@ -5,7 +5,6 @@
 #include "ui/ui.h"
 
 #include <esp_log.h>
-#include <lvgl.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
@@ -13,6 +12,7 @@ static void button_single_click_cb( void *arg, void *usr_data )
 {
   ESP_LOGI( "DIEGO", "BUTTON_SINGLE_CLICK" );
 }
+
 
 static void IRAM_ATTR encoder_position_cb( position_event_t event )
 {
@@ -40,8 +40,8 @@ void app_main(void)
   // Initialize gui
   ui_init();
 
-  lv_obj_add_state(ui_playBtn, LV_STATE_PRESSED);
-  lv_obj_add_state(ui_nextBtn, LV_STATE_FOCUSED);
+  lv_obj_add_state( ui_playBtn, LV_STATE_PRESSED );
+  lv_obj_add_state( ui_nextBtn, LV_STATE_FOCUSED );
 
   while( 1 )
   {
