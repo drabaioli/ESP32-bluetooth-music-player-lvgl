@@ -29,7 +29,8 @@ bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io,
   return false;
 }
 
-static void lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t *color_map)
+
+static void lvgl_flush_cb( lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color_map )
 {
   esp_lcd_panel_handle_t panel_handle = (esp_lcd_panel_handle_t) drv->user_data;
 
@@ -37,8 +38,9 @@ static void lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
   int offsetx2 = area->x2;
   int offsety1 = area->y1;
   int offsety2 = area->y2;
-  esp_lcd_panel_draw_bitmap(panel_handle, offsetx1, offsety1, offsetx2 + 1, offsety2 + 1, color_map);
+  esp_lcd_panel_draw_bitmap( panel_handle, offsetx1, offsety1, offsetx2 + 1, offsety2 + 1, color_map );
 }
+
 
 static void IRAM_ATTR lvgl_tick_cb(void *param)
 {
