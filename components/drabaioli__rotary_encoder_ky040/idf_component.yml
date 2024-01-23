@@ -4,3 +4,4 @@ dependencies:
   ## Required IDF version
   idf:
     version: ">=4.1.0"
+version: 0.0.1

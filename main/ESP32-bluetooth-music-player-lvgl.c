@@ -3,20 +3,23 @@
 #include "rotary_encoder_ky040.h"
 
 #include "ui/ui.h"
+#include "ui/ui_logic.h"
 
-#include <esp_log.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
+
+static state_t g_state;
+
 static void button_single_click_cb( void *arg, void *usr_data )
 {
-  ESP_LOGI( "DIEGO", "BUTTON_SINGLE_CLICK" );
+  ui_action( &g_state, PRESS );
 }
 
 
 static void IRAM_ATTR encoder_position_cb( position_event_t event )
 {
-  ESP_LOGI( "DIEGO", "BUTTON_SINGLE_CLICK %s", event == ENCODER_POSITION_INCREMENT ? "INCREMENT" : "DECREMENT" );
+  ui_action( &g_state, event == ENCODER_POSITION_INCREMENT ? MOVE_RIGHT : MOVE_LEFT );
 }
 
 
@@ -40,8 +43,7 @@ void app_main(void)
   // Initialize gui
   ui_init();
 
-  lv_obj_add_state( ui_playBtn, LV_STATE_PRESSED );
-  lv_obj_add_state( ui_nextBtn, LV_STATE_FOCUSED );
+  ui_logic_init( &g_state );
 
   while( 1 )
   {

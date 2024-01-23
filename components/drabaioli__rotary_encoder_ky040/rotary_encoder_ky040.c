@@ -36,7 +36,7 @@ void event_processor_task( void * rotaty_encoder_ky040_handle )
   position_event_t position_event;
   while( true )
   {
-    if( xQueueReceive( rotaty_encoder_ky040->encoder_event_queue, &position_event, pdMS_TO_TICKS( 100 ) ) )
+    if( xQueueReceive( rotaty_encoder_ky040->encoder_event_queue, &position_event, pdMS_TO_TICKS( 10 ) ) )
     {
       if( rotaty_encoder_ky040->encoder_position_cb )
         rotaty_encoder_ky040->encoder_position_cb( position_event );
