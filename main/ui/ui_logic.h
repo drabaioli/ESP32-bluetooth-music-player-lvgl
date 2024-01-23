@@ -1,6 +1,13 @@
 #ifndef UI_LOGIC
 #define UI_LOGIC
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdbool.h>
+
+
 typedef enum
 {
   VOLUME_BAR = 0,
@@ -14,6 +21,7 @@ typedef enum
 typedef struct
 {
   ui_component_t active_component;
+  bool           control_volume;
 } state_t;
 
 
@@ -29,5 +37,9 @@ typedef enum
 void ui_logic_init( state_t * state );
 
 void ui_action( state_t * state, action_t action );
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
 
 #endif // UI_LOGIC
