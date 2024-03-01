@@ -2,15 +2,15 @@
 
 Use your Esp32 to play and control music from a bluetooth audio source.
 
-This is work in progress, but this is the idea so far:
-
-![Components](/img/bluetooth_music_player.jpg)
-
 # Required components
 
 - **Esp32**: either use a [dev kit](https://www.amazon.com/Freenove-ESP32-WROVER-Bluetooth-Compatible-Tutorials/dp/B09BC5CNHM?th=1 "dev kit") or design your pcb (mine will come soon!) 
 - [**KY-040**](https://components101.com/modules/KY-04-rotary-encoder-pinout-features-datasheet-working-application-alternative "**KY-040**") rotary encoder
 - [**ILI9488**](https://nl.aliexpress.com/item/32985467436.html "**ILI9488**") 3.5" TFT display. There's 2 version of this display: with and without touch screen. This project does not use the touch screen.
+
+The project is still in progress, but this is what it looks like so far:
+
+![Components](/img/bluetooth_music_player.jpg)
 
 # Build
 
