@@ -104,7 +104,7 @@ void initialize_spi()
 }
 
 
-void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, void * spi_driver_user_ctx, size_t buffer_size )
+void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb )
 {
   const esp_lcd_panel_io_spi_config_t io_config = 
   {
@@ -114,7 +114,7 @@ void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered
     .pclk_hz = DISPLAY_REFRESH_HZ,
     .trans_queue_depth = DISPLAY_SPI_QUEUE_LEN,
     .on_color_trans_done = color_transfered_cb,
-    .user_ctx = spi_driver_user_ctx,
+    .user_ctx = NULL,
     .lcd_cmd_bits = DISPLAY_COMMAND_BITS,
     .lcd_param_bits = DISPLAY_PARAMETER_BITS,
     .flags =
@@ -148,7 +148,7 @@ void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered
 
   ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)SPI2_HOST, &io_config, &lcd_io_handle)); 
 
-  ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, buffer_size, &lcd_handle));
+  ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, ILI9488_DISPLAY_W * 25, &lcd_handle));
 
   ESP_ERROR_CHECK(esp_lcd_panel_reset(lcd_handle));
   ESP_ERROR_CHECK(esp_lcd_panel_init(lcd_handle));
@@ -164,16 +164,17 @@ void initialize_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered
 }
 
 
-esp_lcd_panel_handle_t get_lcd_handle()
+esp_lcd_panel_handle_t setup_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb )
 {
+  initialize_spi();
+  initialize_display( color_transfered_cb );
+  display_brightness_init();
+  display_brightness_set(100);
   return lcd_handle;
 }
 
 
-void setup_display( esp_lcd_panel_io_color_trans_done_cb_t color_transfered_cb, void * spi_driver_user_ctx, size_t buffer_size )
+void draw_bitmap( int x1, int y1, int x2, int y2, void * color_map )
 {
-  initialize_spi();
-  initialize_display( color_transfered_cb, spi_driver_user_ctx, buffer_size );
-  display_brightness_init();
-  display_brightness_set(100);
+  esp_lcd_panel_draw_bitmap( lcd_handle, x1, y1, x2, y2, color_map );
 }
