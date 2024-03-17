@@ -44,7 +44,7 @@ In this step you can choose your configuration, like the preferred pinout. For t
 │   ├── drabaioli__ili9488_display      : IDF component to handle ILI9488 TFT display
 │   ├── drabaioli__lvgl_ui              : IDF component to handle LVGL grapical library bootstrap
 │   └── drabaioli__rotary_encoder_ky040 : IDF component to handle KY-040 rotary encoder 
-└── main                                : Main component logic
+└── main                                : Main logic
     └── ui                              : GUI
 ```
 
@@ -64,7 +64,7 @@ All components are designed to be reusable.
 | TFT_DC | 4 |
 | TFT_BACKLIGHT | 18 |
 
-# KY-040 pinout
+## KY-040 pinout
 
 |  pin name |  value |
 | ------------ | ------------ |
