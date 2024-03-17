@@ -54,6 +54,30 @@ Handle to the rotary encoder.
 **`encoder_position_cb_t cb`**
 Callback invoked on encoder position change events.
 
+# Sample usage
+
+```c
+static void button_single_click_cb( void *arg, void *usr_data )
+{
+  ESP_LOGI( "MYAPP", "Button pressed!" );
+}
+
+static void IRAM_ATTR encoder_position_cb( position_event_t event )
+{
+  ESP_LOGI( "MYAPP", "Encoder %S", event == ENCODER_POSITION_INCREMENT ? "incremented" : "decremented" );
+}
+
+void app_main(void)
+{
+  // Setup KY040 rotary encoder
+  rotaty_encoder_ky040_handle_t rotaty_encoder_ky040_handle = NULL;
+  ESP_ERROR_CHECK( new_rotaty_encoder_ky040( &rotaty_encoder_ky040_handle ) );
+
+  rotaty_encoder_ky040_register_button_cb(   rotaty_encoder_ky040_handle, BUTTON_SINGLE_CLICK, button_single_click_cb, NULL );
+  rotaty_encoder_ky040_register_position_cb( rotaty_encoder_ky040_handle, encoder_position_cb );
+}
+```
+
 # Pinout
 
 |  pin name |  value |

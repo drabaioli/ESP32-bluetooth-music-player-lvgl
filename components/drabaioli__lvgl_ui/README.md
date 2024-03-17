@@ -36,3 +36,25 @@ Callback function that LVGL will use to draw onto the screen.
 **`void data_drawn()`**
 Notify LVGL that the pixel buffer has been sent to the screen and that LVGL can send a new one. Call this function when the pixels drawn during `lvgl_flush_cb_t` have been sent to the screen.
 
+# Sample usage
+
+```c
+void lvgl_flush_cb( lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color_map )
+{
+  transfer_pixels_to_display( area->x1, area->y1, area->x2 + 1, area->y2 + 1, color_map );
+}
+
+void app_main(void)
+{
+  // Setup lvgl
+  setup_lvgl_ui( ILI9488_DISPLAY_W, ILI9488_DISPLAY_H, lvgl_flush_cb );
+
+  // Draw a gui
+
+  while( 1 )
+  {
+    vTaskDelay( pdMS_TO_TICKS( 10 ) );
+    lv_timer_handler();
+  }
+}
+```

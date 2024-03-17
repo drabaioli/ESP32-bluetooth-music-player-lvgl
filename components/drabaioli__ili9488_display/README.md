@@ -31,6 +31,22 @@ Bottom-right corner offset where to stop drawing the sprite pointed by `color_ma
 **`void * color_map`**
 Pointer to the pixels to draw. The sprite will have width `x2 - x1` and height `y2 - y1`.
 
+# Sample usage
+
+```c
+bool display_flushed_cb( esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_io_event_data_t * edata, void * user_ctx )
+{
+  // Notify LVGL pixels were transfered to display
+  return false;
+}
+
+void app_main(void)
+{
+  // Setup ili9488 display
+  setup_display( display_flushed_cb );
+}
+```
+
 # Pinout
 
 |  pin name |  value |
