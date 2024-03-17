@@ -5,35 +5,35 @@ This ESP-IDF component handles all bootstrap logic to set up an LVGL UI on a ESP
 # API
 
 ## lvgl_flush_cb_t
-**`typedef void (*lvgl_flush_cb_t)( lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p )`**
+**`typedef void (*lvgl_flush_cb_t)( lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p )`**<br>
 Signature of a callback function invoked when LVGL is ready to draw on screen. The callback function should send the pixel buffer pointed by `color_p` to the display device, and draw on a rectangle defined by `area` which represents the region of the screen where the pixels need to be drawn.
 
 ### input
-**`lv_disp_drv_t * disp_drv`**
+**`lv_disp_drv_t * disp_drv`**<br>
 Pointer to the internal display driver.
 
-**`const lv_area_t * area`**
+**`const lv_area_t * area`**<br>
 Area of the screen where to draw the color buffer.
 
-**`lv_color_t * color_p`**
+**`lv_color_t * color_p`**<br>
 Pointer to the color buffer to draw on screen.
 
 ## setup_lvgl_ui
-**`void setup_lvgl_ui( size_t resolution_w, size_t resolution_h, lvgl_flush_cb_t lvgl_flush_cb )`**
+**`void setup_lvgl_ui( size_t resolution_w, size_t resolution_h, lvgl_flush_cb_t lvgl_flush_cb )`**<br>
 Sets up LVGL ready to handle a GUI on a `resolution_w`x`resolution_h` screen. 
 
 ### input
-**`size_t resolution_w`**
+**`size_t resolution_w`**<br>
 Width of the display.
 
-**`size_t resolution_h`**
+**`size_t resolution_h`**<br>
 Height of the display.
 
-**`lvgl_flush_cb_t lvgl_flush_cb`**
+**`lvgl_flush_cb_t lvgl_flush_cb`**<br>
 Callback function that LVGL will use to draw onto the screen.
 
 ## data_drawn
-**`void data_drawn()`**
+**`void data_drawn()`**<br>
 Notify LVGL that the pixel buffer has been sent to the screen and that LVGL can send a new one. Call this function when the pixels drawn during `lvgl_flush_cb_t` have been sent to the screen.
 
 # Sample usage
