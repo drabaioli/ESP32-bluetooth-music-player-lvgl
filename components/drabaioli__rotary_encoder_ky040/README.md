@@ -53,3 +53,11 @@ Handle to the rotary encoder.
 
 **`encoder_position_cb_t cb`**
 Callback invoked on encoder position change events.
+
+# Pinout
+
+|  pin name |  value |
+| ------------ | ------------ |
+| KY040_SW | 27 |
+| KY040_DT | 26 |
+| KY040_CLK | 25 |
