@@ -1,6 +1,6 @@
 # LVGL bootstrap ESP-IDF Component
 
-This ESP-IDF components handles all bootstrap logic to setup an LVGL UI on a ESP32 based system.
+This ESP-IDF component handles all bootstrap logic to set up an LVGL UI on a ESP32 based system.
 
 # API
 

@@ -1,6 +1,6 @@
 # ILI9488 Display ESP-IDF Component
 
-This ESP-IDF components sets up a ILI9488 display and returns a `esp_lcd_panel_handle_t` handle to it.
+This ESP-IDF component sets up a ILI9488 display and returns a `esp_lcd_panel_handle_t` handle to it.
 
 # API
 
